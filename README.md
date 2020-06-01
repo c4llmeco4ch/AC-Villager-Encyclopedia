@@ -19,7 +19,7 @@ While the goal will be to eventually make this much more user/non-programmer-fri
 
 For now, the first step is to copy the source code:
 
-From the commandline, type
+From the command-line/git bash/terminal, type
 
 ```bash
 git clone https://github.com/c4llmeco4ch/AC-Villager-Encyclopedia.git
