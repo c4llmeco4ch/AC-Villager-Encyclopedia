@@ -44,8 +44,6 @@ def find_villager_list() -> Dict[str, List[str]]:
         villagers[name] = attr
     return villagers
 
-        
-        
 
 if __name__ == '__main__':
     all_v = find_villager_list()
