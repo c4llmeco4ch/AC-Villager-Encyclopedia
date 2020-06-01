@@ -1,7 +1,7 @@
 import requests
 import re
 from bs4 import BeautifulSoup, ResultSet
-from typing import List, Tuple
+from typing import List, Tuple, Dict
 
 WIKI_URL = 'https://animalcrossing.fandom.com/wiki/Villager_list_(New_Horizons)'
 VILLAGER_PERSONALITIES = ['Cranky', 'Jock', 'Lazy', 'Smug', 'Normal', 'Peppy', 'Snooty', 'Sisterly']
@@ -28,7 +28,7 @@ def parse_row(r: ResultSet) -> Tuple[str, List[str]]:
     return (cols[0], cols[2:])
 
 
-def find_villager_list() -> Dict[List[str]]:
+def find_villager_list() -> Dict[str, List[str]]:
     """Scrape a list of villagers from the Wiki, creating a list of villager info
 
     Returns:
