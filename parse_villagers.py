@@ -4,14 +4,15 @@ from bs4 import BeautifulSoup, ResultSet
 from typing import List, Tuple, Dict
 
 WIKI_URL = 'https://animalcrossing.fandom.com/wiki/Villager_list_(New_Horizons)'
-VILLAGER_PERSONALITIES = ['Cranky', 'Jock', 'Lazy', 'Smug', 'Normal', 'Peppy', 'Snooty', 'Sisterly']
+VILLAGER_PERSONALITIES = ['Cranky', 'Jock', 'Lazy', 'Smug',
+                          'Normal', 'Peppy', 'Snooty', 'Sisterly']
 VILLAGER_SPECIES = ['Alligator', 'Anteater', 'Bear', 'Bird', 'Bull',
-    'Cat', 'Chicken', 'Cow', 'Cub', 'Deer',
-    'Dog', 'Duck', 'Eagle', 'Elephant', 'Frog',
-    'Goat', 'Gorilla', 'Hamster', 'Hippo', 'Horse',
-    'Kangaroo', 'Koala', 'Lion', 'Monkey', 'Mouse',
-    'Octopus', 'Ostrich', 'Penguin', 'Pig', 'Rabbit',
-    'Rhino', 'Sheep', 'Squirrel', 'Tiger', 'Wolf']
+                    'Cat', 'Chicken', 'Cow', 'Cub', 'Deer',
+                    'Dog', 'Duck', 'Eagle', 'Elephant', 'Frog',
+                    'Goat', 'Gorilla', 'Hamster', 'Hippo', 'Horse',
+                    'Kangaroo', 'Koala', 'Lion', 'Monkey', 'Mouse',
+                    'Octopus', 'Ostrich', 'Penguin', 'Pig', 'Rabbit',
+                    'Rhino', 'Sheep', 'Squirrel', 'Tiger', 'Wolf']
 
 
 def parse_row(r: ResultSet) -> Tuple[str, List[str]]:
@@ -32,12 +33,13 @@ def find_villager_list() -> Dict[str, List[str]]:
     """Scrape a list of villagers from the Wiki, creating a list of villager info
 
     Returns:
-        List[List[str]] -- The list of villagers with their respective information
+        List[List[str]] -- The list of villagers & their respective information
     """
     villagers = {}
     page = BeautifulSoup(requests.get(WIKI_URL).content, 'lxml')
-    #Pull the villager table from the page
-    table = page.find(lambda tag: tag.name == 'table' and tag.has_attr('style') and 'background-color:#2C852C;' in tag['style'])
+    # Pull the villager table from the page
+    table = page.find(lambda tag: tag.name == 'table' and tag.has_attr('style')
+                      and 'background-color:#2C852C;' in tag['style'])
     rows = table.find_all('tr')[1:]
     for r in rows:
         name, attr = parse_row(r)
@@ -50,8 +52,8 @@ if __name__ == '__main__':
     specific = input("Which villager do you want to learn about: ")
     attrs = all_v[specific]
     print('\n'.join([f'{specific}\'s attributes:',
-            f'Personality: {attrs[0]}',
-            f'Species: {attrs[1]}',
-            f'Birthday: {attrs[2]}',
-            f'Catchphrase: {attrs[3]}',
-            f'Hobbies: {attrs[4]}']))
+                     f'Personality: {attrs[0]}',
+                     f'Species: {attrs[1]}',
+                     f'Birthday: {attrs[2]}',
+                     f'Catchphrase: {attrs[3]}',
+                     f'Hobbies: {attrs[4]}']))
