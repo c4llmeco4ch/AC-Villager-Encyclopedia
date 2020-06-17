@@ -60,3 +60,22 @@ def spin_up_db(filePath: str = 'ac-encyclopedia.db') -> Session:
         Session = sessionmaker(bind=engine)
         sess = Session()
     return sess
+
+
+def tear_down_db(s: Session) -> bool:
+    """Properly close the database session
+
+    Args:
+        s (Session): The database we are looking to close
+
+    Returns:
+        bool: Whether the session was successfully shut down
+    """
+    try:
+        s.close()
+    except:  # does this ever throw an error?
+        print('There was an error shutting down the database. ' +
+              'Manually ensure all data is unaltered.')
+        return False
+    else:
+        return True
